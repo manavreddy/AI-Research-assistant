@@ -6,8 +6,10 @@ Formatting/presentation is handled by the reasoning layer.
 """
 
 import requests
+import os
 from typing import Dict, List, Optional
 import json
+from exa_py import Exa
 
 
 def web_search(tool_input):
@@ -66,6 +68,7 @@ def web_search(tool_input):
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         }
         
+        # exa = Exa(api_key=os.environ.get("EXA_API_KEY"))
         url = "https://api.duckduckgo.com/"
         params = {
             'q': query,

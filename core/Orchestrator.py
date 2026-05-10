@@ -1,8 +1,10 @@
 import json
 
-from Query_understanding import understand_query
+from core.Query_understanding import understand_query
 from Tools.Calculator import calculator
 from Tools.Web_search import web_search
+from Tools.Rag_retriever import rag_retriever
+from core.Response_generation import generate_response
 
 def process_query(query : str):
     structured_query = understand_query(query)
@@ -10,9 +12,9 @@ def process_query(query : str):
     if not structured_query["success"] : 
         return structured_query["error"]
     
-    tools = {"web_search" : Web_search, "calculator" : Calculator}
+    tools = {"web_search": web_search, "calculator": calculator, "rag_retriever": rag_retriever}
 
-       
+    print(json.dumps(structured_query, indent=2))   
     tool_outputs = []
     #tool calling
     for tool_info in structured_query["data"]["tools_required"]:
